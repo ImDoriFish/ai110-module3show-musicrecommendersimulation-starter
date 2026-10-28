@@ -77,15 +77,59 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+Output of `python -m src.main` for the default "pop / happy" profile:
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+```text
+Loaded songs: 10
+
+============================================================
+  User profile
+------------------------------------------------------------
+  genre            : pop
+  mood             : happy
+  energy           : 0.8
+  valence          : 0.8
+  likes_acoustic   : False
+============================================================
+
+#1  Sunrise City  -  Neon Echo
+    pop / happy   |   Score: 5.77 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+1.40)
+      - valence closeness (+0.87)
+      - acoustic preference (+0.50)
+
+#2  Gym Hero  -  Max Pulse
+    pop / intense   |   Score: 4.25 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+0.85)
+      - valence closeness (+0.90)
+      - acoustic preference (+0.50)
+
+#3  Rooftop Lights  -  Indigo Parade
+    indie pop / happy   |   Score: 3.77 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+1.30)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+
+#4  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 1.75 / 6.00
+    Why:
+      - energy closeness (+1.25)
+      - valence closeness (+0.00)
+      - acoustic preference (+0.50)
+
+#5  Storm Runner  -  Voltline
+    rock / intense   |   Score: 1.45 / 6.00
+    Why:
+      - energy closeness (+0.95)
+      - valence closeness (+0.00)
+      - acoustic preference (+0.50)
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
