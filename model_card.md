@@ -92,6 +92,376 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
+### Profile test results
+
+Output of `python -m src.main` (22 songs, top 5 per profile, `SEED = 42`).
+
+#### High-Energy Pop
+
+```text
+============================================================
+  Profile: High-Energy Pop
+------------------------------------------------------------
+  genre            : pop
+  mood             : happy
+  energy           : 0.8
+  valence          : 0.8
+  likes_acoustic   : False
+============================================================
+
+#1  Sunrise City  -  Neon Echo
+    pop / happy   |   Score: 5.77 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+1.40)
+      - valence closeness (+0.87)
+      - acoustic preference (+0.50)
+
+#2  Gym Hero  -  Max Pulse
+    pop / intense   |   Score: 4.25 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+0.85)
+      - valence closeness (+0.90)
+      - acoustic preference (+0.50)
+
+#3  Rooftop Lights  -  Indigo Parade
+    indie pop / happy   |   Score: 3.77 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+1.30)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+
+#4  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 2.17 / 6.00
+    Why:
+      - energy closeness (+1.50)
+      - valence closeness (+0.17)
+      - acoustic preference (+0.50)
+
+#5  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 1.75 / 6.00
+    Why:
+      - energy closeness (+1.25)
+      - valence closeness (+0.00)
+      - acoustic preference (+0.50)
+```
+
+#### Chill Lofi
+
+```text
+============================================================
+  Profile: Chill Lofi
+------------------------------------------------------------
+  genre            : lofi
+  mood             : chill
+  energy           : 0.38
+  valence          : 0.58
+  likes_acoustic   : True
+============================================================
+
+#1  Library Rain  -  Paper Lanterns
+    lofi / chill   |   Score: 5.78 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+1.35)
+      - valence closeness (+0.93)
+      - acoustic preference (+0.50)
+
+#2  Midnight Coding  -  LoRoom
+    lofi / chill   |   Score: 5.73 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+1.30)
+      - valence closeness (+0.93)
+      - acoustic preference (+0.50)
+
+#3  Focus Flow  -  LoRoom
+    lofi / focused   |   Score: 4.87 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+1.40)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+
+#4  Spacewalk Thoughts  -  Orbit Bloom
+    ambient / chill   |   Score: 3.27 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+1.00)
+      - valence closeness (+0.77)
+      - acoustic preference (+0.50)
+
+#5  Coffee Shop Stories  -  Slow Stereo
+    jazz / relaxed   |   Score: 2.52 / 6.00
+    Why:
+      - energy closeness (+1.45)
+      - valence closeness (+0.57)
+      - acoustic preference (+0.50)
+```
+
+#### Deep Intense Rock
+
+```text
+============================================================
+  Profile: Deep Intense Rock
+------------------------------------------------------------
+  genre            : rock
+  mood             : intense
+  energy           : 0.9
+  valence          : 0.5
+  likes_acoustic   : False
+============================================================
+
+#1  Storm Runner  -  Voltline
+    rock / intense   |   Score: 5.88 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+1.45)
+      - valence closeness (+0.93)
+      - acoustic preference (+0.50)
+
+#2  Gym Hero  -  Max Pulse
+    pop / intense   |   Score: 2.95 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+1.35)
+      - valence closeness (+0.10)
+      - acoustic preference (+0.50)
+
+#3  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 2.33 / 6.00
+    Why:
+      - energy closeness (+1.00)
+      - valence closeness (+0.83)
+      - acoustic preference (+0.50)
+
+#4  Stop Breathing  -  Playboi Carti
+    hip-hop / angry   |   Score: 2.23 / 6.00
+    Why:
+      - energy closeness (+1.40)
+      - valence closeness (+0.33)
+      - acoustic preference (+0.50)
+
+#5  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 2.22 / 6.00
+    Why:
+      - energy closeness (+0.75)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+```
+
+#### Hip-Hop Hype (Playboi Carti fan)
+
+```text
+============================================================
+  Profile: Hip-Hop Hype (Playboi Carti fan)
+------------------------------------------------------------
+  genre            : hip-hop
+  mood             : hype
+  energy           : 0.75
+  valence          : 0.45
+  likes_acoustic   : False
+  favorite_artists : ['Playboi Carti']
+============================================================
+
+#1  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 4.42 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+1.25)
+      - valence closeness (+0.67)
+      - acoustic preference (+0.50)
+
+#2  Magnolia  -  Playboi Carti
+    hip-hop / hype   |   Score: 5.12 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+0.65)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+
+#3  Stop Breathing  -  Playboi Carti
+    hip-hop / angry   |   Score: 3.85 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+0.85)
+      - valence closeness (+0.50)
+      - acoustic preference (+0.50)
+
+#4  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 2.87 / 6.00
+    Why:
+      - energy closeness (+1.50)
+      - valence closeness (+0.87)
+      - acoustic preference (+0.50)
+
+#5  Storm Runner  -  Voltline
+    rock / intense   |   Score: 2.10 / 6.00
+    Why:
+      - energy closeness (+0.70)
+      - valence closeness (+0.90)
+      - acoustic preference (+0.50)
+```
+
+#### EDGE: Hyped but Sad (conflicting)
+
+```text
+============================================================
+  Profile: EDGE: Hyped but Sad (conflicting)
+------------------------------------------------------------
+  genre            : indie rock
+  mood             : melancholy
+  energy           : 0.9
+  valence          : 0.2
+  likes_acoustic   : False
+============================================================
+
+#1  Chamber of Reflection  -  Mac DeMarco
+    indie rock / melancholy   |   Score: 4.33 / 6.00
+    Why:
+      - genre match (+2.00)
+      - mood match (+1.00)
+      - energy closeness (+0.00)
+      - valence closeness (+0.83)
+      - acoustic preference (+0.50)
+
+#2  Stop Breathing  -  Playboi Carti
+    hip-hop / angry   |   Score: 2.57 / 6.00
+    Why:
+      - energy closeness (+1.40)
+      - valence closeness (+0.67)
+      - acoustic preference (+0.50)
+
+#3  My Kind of Woman  -  Mac DeMarco
+    indie rock / romantic   |   Score: 2.17 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+0.00)
+      - valence closeness (+0.17)
+
+#4  Storm Runner  -  Voltline
+    rock / intense   |   Score: 2.02 / 6.00
+    Why:
+      - energy closeness (+1.45)
+      - valence closeness (+0.07)
+      - acoustic preference (+0.50)
+
+#5  Salad Days  -  Mac DeMarco
+    indie rock / nostalgic   |   Score: 2.00 / 6.00
+    Why:
+      - genre match (+2.00)
+      - energy closeness (+0.00)
+      - valence closeness (+0.00)
+```
+
+#### EDGE: Unknown Genre (k-pop)
+
+```text
+============================================================
+  Profile: EDGE: Unknown Genre (k-pop)
+------------------------------------------------------------
+  genre            : k-pop
+  mood             : happy
+  energy           : 0.7
+  valence          : 0.75
+  likes_acoustic   : False
+============================================================
+
+#1  Rooftop Lights  -  Indigo Parade
+    indie pop / happy   |   Score: 3.50 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+1.20)
+      - valence closeness (+0.80)
+      - acoustic preference (+0.50)
+
+#2  Sunrise City  -  Neon Echo
+    pop / happy   |   Score: 3.10 / 6.00
+    Why:
+      - mood match (+1.00)
+      - energy closeness (+0.90)
+      - valence closeness (+0.70)
+      - acoustic preference (+0.50)
+
+#3  Sweet Boy  -  Malcolm Todd
+    bedroom pop / playful   |   Score: 2.33 / 6.00
+    Why:
+      - energy closeness (+1.00)
+      - valence closeness (+0.83)
+      - acoustic preference (+0.50)
+
+#4  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 1.88 / 6.00
+    Why:
+      - energy closeness (+1.25)
+      - valence closeness (+0.13)
+      - acoustic preference (+0.50)
+
+#5  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 1.83 / 6.00
+    Why:
+      - energy closeness (+1.00)
+      - valence closeness (+0.33)
+      - acoustic preference (+0.50)
+```
+
+#### EDGE: Capitalized 'Pop'
+
+```text
+============================================================
+  Profile: EDGE: Capitalized 'Pop'
+------------------------------------------------------------
+  genre            : Pop
+  mood             : Happy
+  energy           : 0.8
+  valence          : 0.8
+  likes_acoustic   : False
+============================================================
+
+#1  Sunrise City  -  Neon Echo
+    pop / happy   |   Score: 2.77 / 6.00
+    Why:
+      - energy closeness (+1.40)
+      - valence closeness (+0.87)
+      - acoustic preference (+0.50)
+
+#2  Rooftop Lights  -  Indigo Parade
+    indie pop / happy   |   Score: 2.77 / 6.00
+    Why:
+      - energy closeness (+1.30)
+      - valence closeness (+0.97)
+      - acoustic preference (+0.50)
+
+#3  Gym Hero  -  Max Pulse
+    pop / intense   |   Score: 2.25 / 6.00
+    Why:
+      - energy closeness (+0.85)
+      - valence closeness (+0.90)
+      - acoustic preference (+0.50)
+
+#4  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 2.17 / 6.00
+    Why:
+      - energy closeness (+1.50)
+      - valence closeness (+0.17)
+      - acoustic preference (+0.50)
+
+#5  Night Drive Loop  -  Neon Echo
+    synthwave / moody   |   Score: 1.75 / 6.00
+    Why:
+      - energy closeness (+1.25)
+      - valence closeness (+0.00)
+      - acoustic preference (+0.50)
+```
+
+
 ---
 
 ## 8. Future Work  
