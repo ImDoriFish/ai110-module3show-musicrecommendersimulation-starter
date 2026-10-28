@@ -9,3 +9,15 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Magnolia,Playboi Carti,hip-hop,hype,0.58,163,0.44,0.79,0.01
+12,Sky,Playboi Carti,hip-hop,euphoric,0.80,140,0.55,0.78,0.02
+13,Stop Breathing,Playboi Carti,hip-hop,angry,0.88,155,0.30,0.70,0.01
+14,Chest Pain (I Love),Malcolm Todd,bedroom pop,romantic,0.55,118,0.62,0.70,0.35
+15,Roommates,Malcolm Todd,bedroom pop,nostalgic,0.45,95,0.50,0.68,0.45
+16,Sweet Boy,Malcolm Todd,bedroom pop,playful,0.60,110,0.70,0.75,0.30
+17,Chamber of Reflection,Mac DeMarco,indie rock,melancholy,0.35,96,0.25,0.58,0.45
+18,My Kind of Woman,Mac DeMarco,indie rock,romantic,0.40,108,0.45,0.55,0.60
+19,Salad Days,Mac DeMarco,indie rock,nostalgic,0.55,120,0.68,0.70,0.55
+20,50 Cent,Dean Blunt,experimental,moody,0.40,92,0.35,0.55,0.55
+21,Lush,Dean Blunt,experimental,dreamy,0.30,80,0.30,0.40,0.70
+22,Forever,Dean Blunt,experimental,melancholy,0.25,70,0.20,0.35,0.75

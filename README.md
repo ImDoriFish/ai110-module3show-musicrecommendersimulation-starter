@@ -80,7 +80,7 @@ You can add more tests in `tests/test_recommender.py`.
 Output of `python -m src.main` for the default "pop / happy" profile:
 
 ```text
-Loaded songs: 10
+Loaded songs: 19
 
 ============================================================
   User profile
@@ -117,17 +117,17 @@ Loaded songs: 10
       - valence closeness (+0.97)
       - acoustic preference (+0.50)
 
-#4  Night Drive Loop  -  Neon Echo
+#4  Sky  -  Playboi Carti
+    hip-hop / euphoric   |   Score: 2.17 / 6.00
+    Why:
+      - energy closeness (+1.50)
+      - valence closeness (+0.17)
+      - acoustic preference (+0.50)
+
+#5  Night Drive Loop  -  Neon Echo
     synthwave / moody   |   Score: 1.75 / 6.00
     Why:
       - energy closeness (+1.25)
-      - valence closeness (+0.00)
-      - acoustic preference (+0.50)
-
-#5  Storm Runner  -  Voltline
-    rock / intense   |   Score: 1.45 / 6.00
-    Why:
-      - energy closeness (+0.95)
       - valence closeness (+0.00)
       - acoustic preference (+0.50)
 ```
