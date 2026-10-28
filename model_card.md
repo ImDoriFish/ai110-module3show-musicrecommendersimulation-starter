@@ -2,20 +2,16 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
-
+CartiFinder 1.0: a content-based music recommender that scores songs by genre, mood, energy, valence, and acoustic sound
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
+Goal: Suggest the top 5 songs from a small catalog that best match a user’s stated taste (favorite genre, mood, energy, valence, acoustic preference, and optional favorite artists), and explain why each song was picked.
 
-Prompts:  
+Intended use: A classroom simulation to learn how recommenders turn data into rankings, and where bias comes from. It assumes the user can describe their taste in a few words and numbers.
 
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+Not intended for: Real users or a real music app. It has only 22 songs, no listening history, and AI-estimated song data. It should not be used to decide which artists get promoted.
 
 ---
 
@@ -43,32 +39,23 @@ Every time a song earns points, the system writes down a short reason, like "gen
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
+The catalog has 22 songs. The starter file had 10 (pop, lofi, rock, ambient, jazz, synthwave, indie pop). I added 12 songs from Playboi Carti (hip-hop), Malcolm Todd (bedroom pop), Mac DeMarco (indie rock), and Dean Blunt (experimental). That added moods like hype, angry, romantic, nostalgic, melancholy, and dreamy, plus much sadder songs (valence down to 0.20). Each song has genre, mood, energy, tempo, valence, danceability, and acousticness.
 
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+Limits: The numbers for the songs I added are AI estimates, not real measurements. Most genres have only 1–3 songs (only one rock song). The data has nothing about lyrics, language, vocals, or who listens to what, so it can’t capture the “same audience” connections that real taste depends on.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+Works well when the user’s genre has several songs: Chill Lofi gets three lofi tracks scoring above 5, and the Carti fan gets all three Carti songs on top.
+Clearly separates opposite tastes: pop and lofi results have zero overlap.
+Handles unknown genres gracefully: the k-pop user still gets bright, upbeat songs by falling back on mood and energy. 
 
 ---
 
 ## 6. Limitations and Bias 
 
-the system only understands features, not context. My recommender judges songs purely by genre, mood, energy, valence, and acousticness, so it has no idea which artists share an audience. For the Playboi Carti fan profile, the #4 and #5 picks were a synthwave song and a rock song that have nothing to do with rage or hip-hop; they only ranked high because they are loud and electronic. Meanwhile, Dean Blunt, who many Carti listeners also play, scored under 1.0 because his songs are quiet and sad “on paper.” This creates a filter bubble based on sound instead of taste: users only get songs that measure similar, not songs that people like them actually enjoy.
+The system only understands features, not context. My recommender judges songs purely by genre, mood, energy, valence, and acousticness, so it has no idea which artists share an audience. For the Playboi Carti fan profile, the #4 and #5 picks were a synthwave song and a rock song that have nothing to do with rage or hip-hop; they only ranked high because they are loud and electronic. Meanwhile, Dean Blunt, who many Carti listeners also play, scored under 1.0 because his songs are quiet and sad “on paper.” This creates a filter bubble based on sound instead of taste: users only get songs that measure similar, not songs that people like them actually enjoy.
 
 ---
 
@@ -509,14 +496,8 @@ Output of `python -m src.main` (22 songs, top 5 per profile, `SEED = 42`) using 
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+Fix text matching: lowercase genre and mood before comparing, and give partial credit for related genres (pop ↔ indie pop).
+More diverse top 5: limit how many filler songs can appear, and add more songs per genre so fans don’t run out of matches.
 
 ---
 
@@ -527,5 +508,16 @@ A few sentences about your experience.
 Prompts:  
 
 - What you learned about recommender systems  
+My biggest learning moment was testing the Playboi Carti fan profile. The top 3 Carti songs looked right, but #4 and #5 were a synthwave song and an indie pop song that have nothing to do with rage or hip-hop. Meanwhile, Dean Blunt, who a lot of Carti fans actually listen to, scored under 1.0 because his songs are quiet and sad on paper. That’s when it clicked for me that a recommender only knows the features you give it. It doesn’t understand context or culture, and that’s exactly why real apps like Spotify also use collaborative filtering based on what similar listeners play. I also learned that “feature” in machine learning means a piece of data like energy or genre, not something the app can do, which confused me at first.
+
+- How AI helped, and when I had to double-check it
+I used an AI assistant to explain concepts, write most of the code, which saved a lot of time. But I had to stay in control of the design decisions. When the AI suggested the assignment’s weight shift (cut genre in half, double energy), I tested it and saw that it fixed the pop fan but made the hip-hop fan worse, so I chose my own weights (genre 2.0, mood 1.5, energy 2.0) that kept genre as the strongest signal. I also questioned things that didn’t make sense to me, like why the starter code had both classes and functions doing the same job, and I had to fix a bug where my main.py got corrupted when VS Code had an unsaved copy open while the file was being edited. AI was fast, but I still had to check every result against my own judgment.
+- What surprised me about simple algorithms
+was surprised that just adding up five numbers could feel like real recommendations. The Chill Lofi profile got three actual study tracks, and pop and lofi had zero overlap, which is exactly what I’d expect. Showing the reasons, like “genre match (+2.00),” made it feel smart and trustworthy, even though it’s really just basic math. It also surprised me how easily it breaks: typing “Pop” with a capital P cut the top song’s score in half.
+- What I’d try next
+Next, I’d add a simple form of collaborative filtering, like “people who like Carti also like Dean Blunt,” so the system can learn connections that aren’t in the audio features. I’d also lowercase genres and moods before comparing them, give partial credit for related genres like pop and indie pop, and add more songs per genre so fans of rock or hip-hop don’t run out of real matches.
+
 - Something unexpected or interesting you discovered  
+The most unexpected thing was that the songs showing up the most weren’t the best matches for anyone. Sky and Night Drive Loop appeared in 5 of my 7 test profiles, not because they fit, but because they were “okay at everything”: loud, medium happiness, and not acoustic. Since most of my profiles didn’t like acoustic music, they got a small bonus almost every time. A tiny +0.5 rule I barely thought about ended up shaping almost every list. I also found it interesting that my own favorite-artist shuffle put Sky at #1 for the Carti fan even though Magnolia scored higher, so adding variety can quietly hide the best answer.
 - How this changed the way you think about music recommendation apps  
+I used to think apps like Spotify just “knew” my taste. Now I see that every recommendation is a choice someone made about what counts more: genre or mood, energy or the artist. Changing one weight made my system better for pop fans but worse for hip-hop fans, so there’s no perfect setting, only tradeoffs.

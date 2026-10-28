@@ -86,8 +86,8 @@ def load_songs(csv_path: str) -> List[Dict]:
 
 # --- Algorithm Recipe weights ---
 GENRE_WEIGHT = 2.0
-MOOD_WEIGHT = 1.0
-ENERGY_WEIGHT = 1.5
+MOOD_WEIGHT = 1.5        # experiment: was 1.0
+ENERGY_WEIGHT = 2.0      # experiment: was 1.5
 VALENCE_WEIGHT = 1.0
 ACOUSTIC_WEIGHT = 0.5
 TOLERANCE = 0.3          # how far a number can be from the target and still earn points
