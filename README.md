@@ -17,17 +17,26 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+### How real-world recommenders work
 
-Some prompts to answer:
+Platforms like Spotify and YouTube mainly combine two approaches. **Collaborative filtering** learns from user behavior (likes, skips, playlist adds, replays, listening time) and recommends what similar listeners enjoyed: "people who like what you like also liked this." **Content-based filtering** learns from the songs themselves (genre, mood, energy, tempo, valence) and recommends songs that are similar to what you already play. Real platforms blend both, plus context like time of day, because collaborative filtering struggles with brand-new songs and users, and content-based filtering tends to trap users in a "filter bubble" of the same sound.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+### What my version prioritizes
 
-You can include a simple diagram or bullet list if helpful.
+My recommender is **content-based**, because the dataset only has song attributes and no listening history. It compares each song to a user's taste profile and gives it a score. **Genre** matters most, then **mood**, then how close the song's **energy** and **valence** are to what the user wants. Acoustic vs. electronic sound is a small bonus. After ranking, songs by the user's favorite artists get their positions shuffled within the top results, which adds some variety without letting weak matches in.
+
+### Features used
+
+| `Song` feature | Matching `UserProfile` preference | How they are compared |
+|---|---|---|
+| `genre` | `favorite_genre` | Exact match |
+| `mood` | `favorite_mood` | Exact match |
+| `energy` | `target_energy` | Closeness within a tolerance window |
+| `valence` | `target_valence` | Closeness within a tolerance window |
+| `acousticness` | `likes_acoustic` | Bonus if the song fits the preference |
+| `artist` | `favorite_artists` | Used only to shuffle the final ranking |
+
+`id` and `title` are labels for display. `tempo_bpm` and `danceability` are loaded but not scored, because in this dataset they mostly repeat what energy already captures.
 
 ---
 
