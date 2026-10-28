@@ -92,9 +92,34 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
-### Profile test results
+### Experiment: weight shift
 
-Output of `python -m src.main` (22 songs, top 5 per profile, `SEED = 42`).
+**Question:** Gym Hero (pop, *intense*) kept ranking above Rooftop Lights (indie pop, *happy*) for a happy pop listener, because a genre match (+2.0) was worth twice a mood match (+1.0). What happens if mood and energy count more?
+
+**What I tried.** I tested four sets of weights on all 7 profiles. I focused on two checks: does the happy pop fan get the happy song ahead of Gym Hero, and does the Playboi Carti fan keep all three hip-hop songs at the top?
+
+| Version | Genre / Mood / Energy | Pop fan: Rooftop Lights beats Gym Hero? | Carti fan: top 3 all hip-hop? |
+|---|---|---|---|
+| Original | 2.0 / 1.0 / 1.5 | No (Gym Hero 4.25 vs. Rooftop 3.77) | Yes |
+| Assignment suggestion (half genre, double energy) + double mood | 1.0 / 2.0 / 3.0 | Yes (Rooftop 6.07 vs. Gym Hero 4.10) | **No:** Night Drive Loop (synthwave) passes Stop Breathing, and Rooftop Lights enters the list |
+| Half genre, mood and energy +1 | 1.0 / 2.0 / 2.5 | Yes (5.63 vs. 3.82) | **No:** Night Drive Loop jumps to #3 |
+| **Final: keep genre, mood and energy +0.5** | **2.0 / 1.5 / 2.0** | **Yes (4.70 vs. 4.53)** | **Yes:** Stop Breathing stays #3, and its lead over Night Drive Loop grows (4.13 vs. 3.37) |
+
+**Results with the final weights (top 5):**
+
+```text
+High-Energy Pop:   Sunrise City 6.73, Rooftop Lights 4.70, Gym Hero 4.53, Sky 2.67, Night Drive Loop 2.17
+Deep Intense Rock: Storm Runner 6.87, Gym Hero 3.90, Stop Breathing 2.70, Sky 2.67, Night Drive Loop 2.47
+Hip-Hop Hype:      Sky 4.83 (shuffled to #1), Magnolia 5.83, Stop Breathing 4.13, Night Drive Loop 3.37, Rooftop Lights 2.43
+```
+
+**More accurate, or just different?** Cutting the genre weight made the results *different*, not better. It fixed the pop fan but hurt the hip-hop fan: with genre worth less and energy worth more, any loud electronic song started crowding out real hip-hop. No single set of weights works for every kind of listener. I chose to keep genre as the strongest signal and only nudge mood and energy up. That fixed the Gym Hero problem without losing the hip-hop fan's accuracy, so I kept these weights.
+
+**What weights could not fix.** For the Carti fan, #4 and #5 are still not hip-hop, because the catalog only has three hip-hop songs. That is a data problem, not a weight problem.
+
+### Profile test results (original weights)
+
+Output of `python -m src.main` (22 songs, top 5 per profile, `SEED = 42`) using the **original** weights (genre 2.0, mood 1.0, energy 1.5), before the experiment above.
 
 #### High-Energy Pop
 
