@@ -68,14 +68,7 @@ Prompts:
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+the system only understands features, not context. My recommender judges songs purely by genre, mood, energy, valence, and acousticness, so it has no idea which artists share an audience. For the Playboi Carti fan profile, the #4 and #5 picks were a synthwave song and a rock song that have nothing to do with rage or hip-hop; they only ranked high because they are loud and electronic. Meanwhile, Dean Blunt, who many Carti listeners also play, scored under 1.0 because his songs are quiet and sad “on paper.” This creates a filter bubble based on sound instead of taste: users only get songs that measure similar, not songs that people like them actually enjoy.
 
 ---
 
