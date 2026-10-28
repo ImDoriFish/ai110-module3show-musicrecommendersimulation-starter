@@ -74,16 +74,41 @@ the system only understands features, not context. My recommender judges songs p
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
+### How I tested
 
-Prompts:  
+I ran the recommender on **7 user profiles** and looked at the top 5 songs for each, including the "Why" reasons, to check whether each pick made sense.
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
+- **Normal listeners:** High-Energy Pop, Chill Lofi, Deep Intense Rock, and Hip-Hop Hype (a Playboi Carti fan, with the favorite-artist shuffle turned on)
+- **Edge cases meant to trick the scoring:** Hyped but Sad (energy 0.9 but valence 0.2), Unknown Genre (k-pop, which is not in the catalog), and Capitalized "Pop" (same as the pop fan, but typed "Pop" / "Happy")
 
-No need for numeric metrics unless you created some.
+I also ran one weight experiment (below) and the two starter unit tests with `pytest`. The comparisons in this section use the final weights (genre 2.0, mood 1.5, energy 2.0).
+
+### What I looked for
+
+- Does the #1 song match everything the user asked for?
+- When the user's genre runs out, are the fallback songs reasonable?
+- Does any song show up in almost every list?
+
+### Profile comparisons
+
+- **High-Energy Pop vs. Chill Lofi:** complete opposites with zero overlap. Pop gets loud, bright, electronic songs (Sunrise City, Rooftop Lights), while lofi shifts to quiet, acoustic study tracks (Library Rain, Midnight Coding). This makes sense because energy and acousticness point in opposite directions for these two users.
+- **High-Energy Pop vs. Deep Intense Rock:** both want high energy, so they share Gym Hero, Sky, and Night Drive Loop. The difference is the feeling: pop puts the *happy* Rooftop Lights at #2, while rock puts the *intense* Gym Hero at #2. Same energy, different mood.
+- **Chill Lofi vs. Deep Intense Rock:** no overlap at all. Lofi has plenty of matches (three lofi songs score above 5), while rock has only one rock song (Storm Runner) and then falls back to pop and hip-hop. The rock fan is underserved because of the catalog, not the math.
+- **Deep Intense Rock vs. Hip-Hop Hype:** both like loud songs, so Stop Breathing and Night Drive Loop appear in both. The hip-hop fan gets three real genre matches at the top, while the rock fan gets only one, which shows how much genre drives the top of the list.
+- **High-Energy Pop vs. Capitalized "Pop":** the same person, but typing "Pop" instead of "pop" dropped Sunrise City from 6.73 to 3.23 and let Sky move up to #3. The system treats capital letters as a different genre. This is a real bug that an edge case caught.
+- **High-Energy Pop vs. Unknown Genre (k-pop):** with no k-pop in the catalog, nobody gets genre points, so the system falls back on mood and energy. It still gives sensible bright, upbeat songs (Rooftop Lights, Sunrise City, Sweet Boy), just with lower scores.
+- **Hyped but Sad vs. Deep Intense Rock:** both want energy around 0.9, but the sad user's #1 is Chamber of Reflection, a quiet song (energy 0.35). It won on genre, mood, and valence even though it got zero energy points. No song in the catalog is both loud *and* sad, so the system has to pick one want and ignore the other.
+- **Hip-Hop Hype vs. High-Energy Pop:** both lists end with the same kind of "filler" songs (Night Drive Loop, Sky, or Rooftop Lights). Once the favorite genre runs out, everyone gets the same loud, non-acoustic songs.
+
+### What surprised me
+
+- **Sky and Night Drive Loop show up in 5 of 7 lists.** They are not great matches for anyone, but they are "okay at everything": high energy, middle valence, and not acoustic. Since most profiles don't like acoustic music, they get the +0.5 acoustic bonus almost every time.
+- **The shuffle put Sky at #1 for the Carti fan** even though Magnolia scored higher. Variety can hide the best match.
+- **The fallback songs for the Carti fan felt wrong to me.** The top 3 Playboi Carti songs were right, but #4 and #5 (a synthwave song and an indie pop song) have nothing to do with rage or hip-hop. They only ranked high because of their scores on features like energy; the code doesn't know the context. As a listener, I would expect Dean Blunt there instead, but his songs are quiet and sad on paper, so they score under 1.0.
+
+### Why does Gym Hero keep showing up for "Happy Pop" fans? (plain English)
+
+Gym Hero is labeled "pop" and is very loud, so for a pop fan it automatically gets the biggest bonus in the system, the genre match, plus most of the energy points. It never gets the "happy" bonus, because it is an *intense* workout song. With my original weights, the genre bonus was so big that Gym Hero beat Rooftop Lights, a happy song that fits better. After I raised the mood and energy weights a little, Rooftop Lights now edges ahead, but Gym Hero still lands at #3. The system trusts the genre label more than the actual feeling of the song.
 
 ### Experiment: weight shift
 
